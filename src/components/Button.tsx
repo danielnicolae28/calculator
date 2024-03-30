@@ -10,6 +10,8 @@ const Button = ({children,typeInfo, assigneNumHandler}:TypeButtonProp) => {
 
 
 
+
+
   return (
     <button onClick={()=>{assigneNumHandler(typeInfo)}}>{children}</button>
   )

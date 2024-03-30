@@ -1,8 +1,8 @@
 
-const Input = ({output}:{output:string}) => {
+const Input = () => {
   return (
     <div>
-      <h1>{output}</h1>
+      <h1></h1>
     </div>
   )
 }

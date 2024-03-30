@@ -1,36 +1,58 @@
-import Button from "./components/Button"
-import Input from "./components/Input"
+
+// import Input from "./components/Input"
 import { useState } from "react"
 
 function App() {
- 
-const buttonInfo:string[] = ["%",'CE','C','<-','7','8','9','x','4','5','6','-','1','2','3','+','+/-','0','.','=']
 
+  const [inputButton, setInputButton] = useState<number>(0)
+  const [output, setOutput] = useState<number>()
 
-const[num,setNum] = useState<string>("0");
+  const inputHandler = (value: number) => {
+    if (inputButton === 0) {
+      console.log(inputButton, value)
+      setInputButton(inputButton + value)
+    } else {
+      console.log(inputButton, value)
+      setInputButton(inputButton.toString() + value.toString())
+    }
+  }
 
-const assigneNumHandler=(info:string)=>{
-setNum(info)
-}
-
+  const outputHandler = (value: string) => {
+    setOutput(inputButton.toString() + value);
+    setInputButton(0)
+  }
 
 
   return (
     <>
-<div>
-  <div>
+      <div>
+        <div>
+          <h2>{output}</h2>
+          <h1>{inputButton}</h1>
 
-  <p style={{margin:"-1px"}}>9</p>
-  <Input output={num}/>
+          {/* <p style={{margin:"-1px"}}>9</p> */}
+          {/* <Input/> */}
 
-  </div>
-  <div style={{width:"300px", height:"300px",display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr"}}>
-   {buttonInfo.map(info=>(
-    
-    <Button key={info} typeInfo={info} assigneNumHandler={assigneNumHandler}>{info}</Button>
-   ))}
-  </div>
-</div>
+        </div>
+        <div style={{ width: "300px", height: "300px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
+          <button onClick={() => inputHandler(7)}>7</button>
+          <button onClick={() => inputHandler(8)}>8</button>
+          <button onClick={() => inputHandler(9)}>9</button>
+          <button onClick={() => inputHandler(4)}>4</button>
+          <button onClick={() => inputHandler(5)}>5</button>
+          <button onClick={() => inputHandler(6)}>6</button>
+          <button onClick={() => inputHandler(1)}>1</button>
+          <button onClick={() => inputHandler(2)}>2</button>
+          <button onClick={() => inputHandler(3)}>3</button>
+          <button onClick={() => inputHandler(0)}>0</button>
+          <button onClick={() => outputHandler("-")}>-</button>
+          <button onClick={() => outputHandler("*")}>*</button>
+          <button onClick={() => outputHandler("*")}>/</button>
+          <button onClick={() => outputHandler("*")}>+</button>
+          <button >d</button>
+          <button onClick={() => outputHandler("*")}>=</button>
+        </div>
+      </div>
     </>
   )
 }
