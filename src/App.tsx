@@ -4,8 +4,12 @@ import { useState } from "react"
 
 function App() {
 
-  const [inputButton, setInputButton] = useState<number>(0)
-  const [output, setOutput] = useState<number>()
+  const [inputButton, setInputButton] = useState<number>(0);
+  const [output, setOutput] = useState<number>();
+  const [shadowOutput,setShadowOutput] = useState<number>()
+  const [minus,setMinus] = useState<number>(0);
+  const [signTypes,setSignTypes] = useState<string>("")
+
 
   const inputHandler = (value: number) => {
     if (inputButton === 0) {
@@ -16,12 +20,71 @@ function App() {
       setInputButton(inputButton.toString() + value.toString())
     }
   }
-
+  
   const outputHandler = (value: string) => {
-    setOutput(inputButton.toString() + value);
+    setShadowOutput(inputButton);
+    setSignTypes(value)
+    setOutput(inputButton + value);
     setInputButton(0)
   }
+ 
 
+  const minusHandler = ()=>{
+    if(shadowOutput === undefined){
+      return
+    }else{
+
+      setMinus(shadowOutput - inputButton)
+      
+      setOutput(shadowOutput + " " + "-" + " " + inputButton)
+      setInputButton(shadowOutput - inputButton)
+    }
+  }
+  const plusHandler = ()=>{
+    if(shadowOutput === undefined){
+      return
+    }else{
+
+      setMinus(shadowOutput + inputButton)
+      setOutput(shadowOutput + " " + "+" + " " + inputButton)
+      setInputButton(shadowOutput + inputButton)
+    }
+  }
+  const multiplyHandler = ()=>{
+    if(shadowOutput === undefined){
+      return
+    }else{
+
+      setMinus(shadowOutput * inputButton)
+      setOutput(shadowOutput + " " + "*" + " " + inputButton)
+      setInputButton(shadowOutput * inputButton)
+    }
+  }
+  const divideHandler = ()=>{
+    if(shadowOutput === undefined){
+      return
+    }else{
+
+      setMinus(shadowOutput / inputButton)
+      setOutput(shadowOutput + " " + "/" + " " + inputButton)
+      setInputButton(shadowOutput / inputButton)
+    }
+  }
+
+  const equalHandler = ()=>{
+    if(signTypes === '-'){
+      minusHandler()
+    }
+    if(signTypes === '+'){
+      plusHandler()
+    }
+    if(signTypes === '*'){
+      multiplyHandler()
+    }
+    if(signTypes === '/'){
+      divideHandler()
+    }
+  }
 
   return (
     <>
@@ -30,8 +93,6 @@ function App() {
           <h2>{output}</h2>
           <h1>{inputButton}</h1>
 
-          {/* <p style={{margin:"-1px"}}>9</p> */}
-          {/* <Input/> */}
 
         </div>
         <div style={{ width: "300px", height: "300px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
@@ -47,10 +108,10 @@ function App() {
           <button onClick={() => inputHandler(0)}>0</button>
           <button onClick={() => outputHandler("-")}>-</button>
           <button onClick={() => outputHandler("*")}>*</button>
-          <button onClick={() => outputHandler("*")}>/</button>
-          <button onClick={() => outputHandler("*")}>+</button>
+          <button onClick={() => outputHandler("/")}>/</button>
+          <button onClick={() => outputHandler("+")}>+</button>
           <button >d</button>
-          <button onClick={() => outputHandler("*")}>=</button>
+          <button onClick={() => equalHandler()}>=</button>
         </div>
       </div>
     </>
