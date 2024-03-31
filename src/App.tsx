@@ -47,7 +47,7 @@ function App() {
 
       setMinus(shadowOutput + inputButton)
       setOutput(shadowOutput + " " + "+" + " " + inputButton)
-      setInputButton(shadowOutput + inputButton)
+      setInputButton(+shadowOutput + +inputButton)
     }
   }
   const multiplyHandler = ()=>{
@@ -86,6 +86,15 @@ function App() {
     }
   }
 
+
+
+  const clearHandler = ()=>{
+setOutput();
+setInputButton(0);
+
+  }
+
+
   return (
     <>
       <div>
@@ -110,7 +119,7 @@ function App() {
           <button onClick={() => outputHandler("*")}>*</button>
           <button onClick={() => outputHandler("/")}>/</button>
           <button onClick={() => outputHandler("+")}>+</button>
-          <button >d</button>
+          <button onClick={()=>{clearHandler()}}>C</button>
           <button onClick={() => equalHandler()}>=</button>
         </div>
       </div>
